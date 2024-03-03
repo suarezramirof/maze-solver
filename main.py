@@ -1,25 +1,20 @@
 from window import Window
 from geometry import Line, Point, Cell
+from maze import Maze
 
 def main():
-    win = Window(800, 600)
-    line1 = Line(Point(10, 10), Point(200, 250))
-    line2 = Line(Point(500, 50), Point(200, 750))
-    win.draw_line(line1, "black")
-    win.draw_line(line2, "red")
-    cell1 = Cell(win)
-    cell1.draw(200,200,250,250)
+    window_width = 800
+    window_height = 500
+    win = Window(window_width, window_height)
 
-    cell2 = Cell(win)
-    cell2.has_right_wall = False
-    cell2.draw(100,200,150,250)
+    num_cols = 20
+    num_rows = 10
+    margin = 100
+    cell_width = (window_width - margin * 2) / num_cols
+    cell_height = (window_height - margin * 2) / num_rows
 
-    cell3 = Cell(win)
-    cell3.has_top_wall = False
-    cell3.draw(100, 250, 150, 300)
+    maze = Maze(margin, margin, num_rows, num_cols, cell_width, cell_height, win)
 
-    cell1.draw_move(cell2)
-    cell2.draw_move(cell3)
     win.wait_for_close()
 
 main()
